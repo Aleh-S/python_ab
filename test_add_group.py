@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.firefox.webdriver import WebDriver
-from selenium.webdriver.common.action_chains import ActionChains
-import time, unittest
+import unittest
 
 def is_alert_present(wd):
     try:
@@ -15,7 +14,7 @@ class test_add_group(unittest.TestCase):
         self.wd = WebDriver(capabilities={"marionette": False}, firefox_binary="C:/Program Files/Mozilla Firefox/firefox.exe")
         self.wd.implicitly_wait(60)
     
-    def test_(self):
+    def test_test_add_group(self):
         success = True
         wd = self.wd
         wd.get("http://localhost:8080/addressbook/")
