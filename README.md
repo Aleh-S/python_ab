@@ -1,1 +1,1 @@
-# python_ab
+# Repository for Python + Selenium by A. Barancev
