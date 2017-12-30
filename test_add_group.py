@@ -19,7 +19,7 @@ class test_add_group(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.open_group_page(wd)
-        self.create_group(wd)
+        self.create_group(wd, name="group1", header="group1_header", footer="group1_footer")
         self.return_to_groups_page(wd)
         self.logout(wd)
 
@@ -30,19 +30,19 @@ class test_add_group(unittest.TestCase):
         wd.find_element_by_link_text("group page").click()
         wd.find_element_by_css_selector("span.group").click()
 
-    def create_group(self, wd):
+    def create_group(self, wd, name, header, footer):
         # init group creation
         wd.find_element_by_name("new").click()
         # fill group form
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
-        wd.find_element_by_name("group_name").send_keys("group1")
+        wd.find_element_by_name("group_name").send_keys(name)
         wd.find_element_by_name("group_header").click()
         wd.find_element_by_name("group_header").clear()
-        wd.find_element_by_name("group_header").send_keys("group1_header")
+        wd.find_element_by_name("group_header").send_keys(header)
         wd.find_element_by_name("group_footer").click()
         wd.find_element_by_name("group_footer").clear()
-        wd.find_element_by_name("group_footer").send_keys("group1_footer")
+        wd.find_element_by_name("group_footer").send_keys(footer)
         # submit group creation
         wd.find_element_by_name("submit").click()
 
