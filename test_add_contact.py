@@ -27,7 +27,7 @@ class test_add_contact(unittest.TestCase):
                                    mobile="(408)111-3333", worktel="(408)111-4444", fax="(408)111-5555",
                                    email="aleh123@gmail.com", email2="aleh345@gmail.com", email3="aleh789@gmail.com",
                                    address2="N/A", phone2="N/A", notes="Some notes.")
-        self.add_new_contact_photo(wd)
+        self.add_new_contact_photo(wd, pathtojpg="C:\QA\ABarancev\python_ab\\files\\foto1.jpg")
         self.add_new_contact_birthday(wd)
         self.add_new_contact_anniversary(wd)
         self.submit_new_contact_creation(wd)
@@ -65,9 +65,9 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys("2004")
 
-    def add_new_contact_photo(self, wd):
+    def add_new_contact_photo(self, wd, pathtojpg):
         photo = wd.find_element_by_name("photo")
-        photo.send_keys("C:\QA\ABarancev\python_ab\\files\\foto1.jpg")
+        photo.send_keys(pathtojpg)
 
     def fill_new_contact_data(self, wd, firstname, lastname, title, company, address, hometel, mobile, worktel, fax,
                               email, email2, email3, address2, phone2, notes):
