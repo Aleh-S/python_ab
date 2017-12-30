@@ -14,9 +14,10 @@ def is_alert_present(wd):
 
 class test_add_contact(unittest.TestCase):
     def setUp(self):
-        self.wd = WebDriver()
+        self.wd = WebDriver(capabilities={"marionette": False}, firefox_binary=
+            "C:/Program Files/Mozilla Firefox/firefox.exe")
         self.wd.implicitly_wait(60)
-    
+
     def test_test_add_contact(self):
         success = True
         wd = self.wd
@@ -35,7 +36,8 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
         wd.find_element_by_name("lastname").send_keys("Shybaila")
-        wd.find_element_by_name("photo").click()
+        foto = wd.find_element_by_name("photo")
+        foto.send_keys("C:\QA\ABarancev\python_ab\\files\\foto1.jpg")
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
         wd.find_element_by_name("title").send_keys("QA")
@@ -91,11 +93,10 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("notes").send_keys("Some notes.")
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
         wd.find_element_by_link_text("home").click()
-        wd.find_element_by_xpath("//table[@id='maintable']//td[.='Shybaila']").click()
         wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[7]/a/img").click()
         wd.find_element_by_link_text("Logout").click()
         self.assertTrue(success)
-    
+
     def tearDown(self):
         self.wd.quit()
 
