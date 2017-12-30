@@ -14,15 +14,19 @@ def is_alert_present(wd):
 class test_add_contact(unittest.TestCase):
     def setUp(self):
         self.wd = WebDriver(capabilities={"marionette": False}, firefox_binary=
-            "C:/Program Files/Mozilla Firefox/firefox.exe")
+                            "C:/Program Files/Mozilla Firefox/firefox.exe")
         self.wd.implicitly_wait(60)
 
     def test_test_add_contact(self):
         wd = self.wd
         self.open_home_page(wd)
-        self.login(wd)
+        self.login(wd, username="admin", password="secret")
         self.open_new_contact_page(wd)
-        self.fill_new_contact_data(wd)
+        self.fill_new_contact_data(wd, firstname="Aleh", lastname="Shybaila", title="QA", company="BBB",
+                                   address="123 Main Str, Cupertino, CA 95014", hometel="(408)111-2222",
+                                   mobile="(408)111-3333", worktel="(408)111-4444", fax="(408)111-5555",
+                                   email="aleh123@gmail.com", email2="aleh345@gmail.com", email3="aleh789@gmail.com",
+                                   address2="N/A", phone2="N/A", notes="Some notes.")
         self.add_new_contact_photo(wd)
         self.add_new_contact_birthday(wd)
         self.add_new_contact_anniversary(wd)
@@ -65,58 +69,59 @@ class test_add_contact(unittest.TestCase):
         photo = wd.find_element_by_name("photo")
         photo.send_keys("C:\QA\ABarancev\python_ab\\files\\foto1.jpg")
 
-    def fill_new_contact_data(self, wd):
+    def fill_new_contact_data(self, wd, firstname, lastname, title, company, address, hometel, mobile, worktel, fax,
+                              email, email2, email3, address2, phone2, notes):
         # fill all text fields of new contact form
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
-        wd.find_element_by_name("firstname").send_keys("Aleh")
+        wd.find_element_by_name("firstname").send_keys(firstname)
         wd.find_element_by_name("lastname").click()
         wd.find_element_by_name("lastname").clear()
-        wd.find_element_by_name("lastname").send_keys("Shybaila")
+        wd.find_element_by_name("lastname").send_keys(lastname)
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
-        wd.find_element_by_name("title").send_keys("QA")
+        wd.find_element_by_name("title").send_keys(title)
         wd.find_element_by_name("company").click()
         wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys("BBB")
+        wd.find_element_by_name("company").send_keys(company)
         wd.find_element_by_name("address").click()
         wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys("123 Main Str, Cupertino, CA 95014")
+        wd.find_element_by_name("address").send_keys(address)
         wd.find_element_by_name("home").click()
         wd.find_element_by_name("home").clear()
-        wd.find_element_by_name("home").send_keys("(408)111-2222")
+        wd.find_element_by_name("home").send_keys(hometel)
         wd.find_element_by_name("mobile").click()
         wd.find_element_by_name("mobile").clear()
-        wd.find_element_by_name("mobile").send_keys("(408)111-3333")
+        wd.find_element_by_name("mobile").send_keys(mobile)
         wd.find_element_by_name("work").click()
         wd.find_element_by_name("work").clear()
-        wd.find_element_by_name("work").send_keys("(408)111-4444")
+        wd.find_element_by_name("work").send_keys(worktel)
         wd.find_element_by_name("fax").click()
         wd.find_element_by_name("fax").clear()
-        wd.find_element_by_name("fax").send_keys("(408)111-5555")
+        wd.find_element_by_name("fax").send_keys(fax)
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
-        wd.find_element_by_name("email").send_keys("aleh123@gmail.com")
+        wd.find_element_by_name("email").send_keys(email)
         wd.find_element_by_name("email2").click()
         wd.find_element_by_name("email2").clear()
-        wd.find_element_by_name("email2").send_keys("aleh345@gmail.com")
+        wd.find_element_by_name("email2").send_keys(email2)
         wd.find_element_by_name("email3").click()
         wd.find_element_by_name("email3").clear()
-        wd.find_element_by_name("email3").send_keys("aleh789@gmail.com")
+        wd.find_element_by_name("email3").send_keys(email3)
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").clear()
-        wd.find_element_by_name("address2").send_keys("N/A")
+        wd.find_element_by_name("address2").send_keys(address2)
         wd.find_element_by_name("phone2").click()
         wd.find_element_by_name("phone2").clear()
-        wd.find_element_by_name("phone2").send_keys("N/A")
+        wd.find_element_by_name("phone2").send_keys(phone2)
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
-        wd.find_element_by_name("notes").send_keys("Some notes.")
+        wd.find_element_by_name("notes").send_keys(notes)
 
     def open_new_contact_page(self, wd):
         wd.find_element_by_link_text("add new").click()
 
-    def login(self, wd, username="admin", password="secret"):
+    def login(self, wd, username, password):
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
