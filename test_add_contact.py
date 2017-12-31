@@ -20,19 +20,12 @@ class test_add_contact(unittest.TestCase):
 
     def test_test_add_contact(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_new_contact_page(wd)
         self.fill_new_contact_data(wd, Contact(firstname="Aleh", lastname="Shybaila", title="QA", company="BBB",
                                    address="123 Main Str, Cupertino, CA 95014", hometel="(408)111-2222",
                                    mobile="(408)111-3333", worktel="(408)111-4444", fax="(408)111-5555",
                                    email="aleh123@gmail.com", email2="aleh345@gmail.com", email3="aleh789@gmail.com",
                                    address2="N/A", phone2="N/A", notes="Some notes."))
-        self.add_new_contact_photo(wd, pathtojpg="C:\QA\ABarancev\python_ab\\files\\foto1.jpg")
-        self.add_new_contact_birthday(wd)
-        self.add_new_contact_anniversary(wd)
-        self.submit_new_contact_creation(wd)
-        self.return_to_homepage(wd)
         self.open_details_page(wd)
         self.logout(wd)
 
@@ -71,7 +64,8 @@ class test_add_contact(unittest.TestCase):
         photo.send_keys(pathtojpg)
 
     def fill_new_contact_data(self, wd, contact):
-        # fill all text fields of new contact form
+        self.open_new_contact_page(wd)
+        # fill text fields
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(contact.firstname)
@@ -117,11 +111,18 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contact.notes)
+        # fill not text fields
+        self.add_new_contact_photo(wd, pathtojpg="C:\QA\ABarancev\python_ab\\files\\foto1.jpg")
+        self.add_new_contact_birthday(wd)
+        self.add_new_contact_anniversary(wd)
+        self.submit_new_contact_creation(wd)
+        self.return_to_homepage(wd)
 
     def open_new_contact_page(self, wd):
         wd.find_element_by_link_text("add new").click()
 
     def login(self, wd, username, password):
+        self.open_home_page(wd)
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
