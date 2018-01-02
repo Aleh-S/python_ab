@@ -2,7 +2,7 @@
 from model.contact import Contact
 
 
-def test_test_add_contact(app):
+def test_add_contact(app):
     app.session.login(username="admin", password="secret")
     app.contact.fill_data(Contact(firstname="Aleh", lastname="Shybaila", title="QA", company="BBB",
                                   address="123 Main Str, Cupertino, CA 95014", hometel="(408)111-2222",
