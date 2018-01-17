@@ -91,6 +91,8 @@ class ContactHelper:
 
     def edit_data(self, contact):
         wd = self.app.wd
+        # open contact page
+        self.app.return_to_homepage()
         # select first contact
         wd.find_element_by_name("selected[]").click()
         # click on Edit button
